@@ -57,7 +57,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser())
 app.use(favicon('Public/logo.png'));
-app.use('/public' , express.static(path.join(__dirname, 'public')));
+app.use('/public' , express.static(path.join(__dirname, 'Public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(function(req, res, next) {
