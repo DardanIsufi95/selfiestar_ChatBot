@@ -19,7 +19,7 @@ app.set('port', port);
  * Create HTTP server.
  */
 createCert().then(keys => {
-  https.createServer(keys,app)
+  let server = https.createServer(keys,app)
 
   server.listen(port);
   server.on('error', onError);
