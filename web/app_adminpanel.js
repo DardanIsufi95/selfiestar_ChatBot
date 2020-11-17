@@ -375,7 +375,7 @@ app.all("/admin*" , (req,res,next)=>{
 app.get("/admin/:tab",(req,res)=>{
     switch(req.params.tab){
         case "login": 
-            res.render("/pages/login")  
+            res.render("pages/login")  
         break;
         case "logout": 
             res.cookie("token","")
