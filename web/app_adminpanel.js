@@ -57,8 +57,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser())
 app.use(favicon('Public/logo.png'));
-app.use('/public', express.static('Public'))
+app.use('/public' , express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'))
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization,authtoken");
@@ -128,12 +129,11 @@ app.post("/auth", (req,res)=>{
                         password: result[0][0]['chat_password']
                     }
                 },(error, response, body)=>{
-                    res.send(token)
-                    // if(body == '1'){
-                    //     res.send(token)
-                    // }else{
-                    //     res.send("0")
-                    // }
+                    if(body == '1'){
+                        res.send(token)
+                    }else{
+                        res.send("0")
+                    }
                 }) 
             }else{
                 res.send("0")
@@ -375,7 +375,7 @@ app.all("/admin*" , (req,res,next)=>{
 app.get("/admin/:tab",(req,res)=>{
     switch(req.params.tab){
         case "login": 
-            res.render("pages/login")  
+            res.render("/pages/login")  
         break;
         case "logout": 
             res.cookie("token","")
