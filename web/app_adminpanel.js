@@ -130,6 +130,7 @@ app.post("/auth", (req,res)=>{
                     }
                 },(error, response, body)=>{
                     if(body == '1'){
+                        query(`UPDATE users SET ext='1' WHERE '${result[0][0]['id']}'`)
                         res.send(token)
                     }else{
                         res.send("0")
