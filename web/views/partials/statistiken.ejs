@@ -1,0 +1,37 @@
+<table class="table table-striped mt-3">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Selfiestar zugang</th>
+            <th scope="col">Extension</th>
+            <th scope="col">Online</th>
+            <th scope="col">Sterne</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% data.forEach((user)=>{ %>
+            <tr>
+                <th scope="row"><%- user.id %></th>
+                <td><%- user.name %></td>
+                <td><%- user.username %></td>
+                <% if(user.ext == 1){ %>
+                    <td><span class="text-success">JA</span></td>
+                    <% if(user.online){ %>
+                        <td><span class="text-success">Online</span></td>
+                    <% }else{ %>
+                        <td><span class="text-danger">Offline</span></td>
+                    <% } %>
+                    
+                    <td><strong><%- user.stars %></strong></td>
+                <% } else { %>
+                    <td><span class="text-danger">EXT nicht instaliert</span></td>
+                    <td><span class="text-danger">EXT nicht instaliert</span></td>
+                    <td><span class="text-danger">EXT nicht instaliert</span></td>
+                <% } %>
+                
+
+            </tr>
+        <% }) %>
+    </tbody>
+</table>

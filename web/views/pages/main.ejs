@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <title>Selfiestar@eCreate</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            <img src="/public/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            Selfiestar(eCreate)
+          </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class='nav-item <% if(tab == "mitarbeiter"){ %><%= "active" %> <% } %> '>
+                    <a class="nav-link" href="/admin/mitarbeiter">Mitarbeiter</a>
+                </li>
+                <li class='nav-item <% if(tab == "statistiken"){ %><%= "active" %> <% } %>'>
+                    <a class="nav-link" href="/admin/statistiken">Statistiken</a>
+                </li>
+                <li class='nav-item <% if(tab == "texte"){ %><%= "active" %> <% } %>''>
+                    <a class="nav-link " href="/admin/texte">Texte</a>
+                </li>
+            </ul>
+            <a class="btn btn-outline-danger my-2 my-sm-1" href="/admin/logout">Log Out</a>
+
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <% if(tab == "mitarbeiter"){ %>
+            <%- include(`../partials/mitarbeiter`)%>
+        <% } else if(tab == "statistiken") { %>
+            <%- include(`../partials/statistiken`)%>
+        <% } else if(tab == "texte") { %>
+            <%- include(`../partials/texte`)%>
+        <% }%>
+    </div>
+    
+</body>
+<script src="/public/main.js"></script>
+</html>

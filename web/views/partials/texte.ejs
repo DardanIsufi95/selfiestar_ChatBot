@@ -1,0 +1,39 @@
+<table class="table table-striped mt-3">
+    <colgroup>
+        <col >
+        <col>
+        <col>
+        <col>
+        <col>
+        <col style="width: 33%;">
+    </colgroup>
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Selfiestar zugang</th>
+            <th scope="col">Profil</th>
+            <th scope="col">Kunde</th>
+            <th scope="col">Zeit</th>
+            <th scope="col">Text</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <% data.forEach((user)=>{ %>
+            <tr>
+                <td><%- user.name %></td>
+                <td><%- user.chat_username %></td>
+                <td><%- user.profile %></td>
+                <td><%- user.client %></td>
+                <td><%- user.timestamp %></td>
+                <td><%- user.text %></td>
+
+                
+                
+
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo=" crossorigin="anonymous"></script>
+<script src="/public/texte.js"></script>

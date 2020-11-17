@@ -1,0 +1,260 @@
+<ul class="nav nav-pills mt-3">
+    <li class="nav-item mx-1">
+        <a class="nav-link btn btn-outline-success" id="add_emp" href="#">Miarbeiter Hinzufuegen</a>
+    </li>
+    <li class="nav-item mx-1">
+        <a class="nav-link btn btn-outline-warning" id="edit_settings" href="#" data-toggle="modal" data-target="#settings_modal">Einstelungen</a>
+    </li>
+</ul>
+<table class="table table-striped mt-3">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Username</th>
+            <th scope="col">Selfiestar zugang</th>
+            <th scope="col">Max Nachrichten/Profil</th>
+            <th scope="col">Fotos Erlaubt</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% data.forEach((user)=>{ %>
+            <tr>
+                <th scope="row"><%- user.id %></th>
+                <td><%- user.name %></td>
+                <td><%- user.username %></td>
+                <td><%- user.chat_username %></td>
+                <td><%- user.max_msg_profile %></td>
+                <td><%- user.allow_photos == 1 ? "Ja" : "Nein" %></td>
+                <td>
+                    <button class="btn btn-sm btn-warning edit_user" data-json="<%= JSON.stringify(user) %>">Edit</button>
+                    <button class="btn btn-sm btn-danger del_user ml-1" data-json="<%= JSON.stringify(user) %>">Delete</button>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+<div class="modal fade" id="user_new_modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_title">Mitarbeiter</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/mitarbeiter">
+                    <input type="hidden" id="user_action" value="insert">
+                    <div class="form-group row">
+                        <label for="user_name" class="col-sm-4 col-form-label">Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="user_name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="user_username" class="col-sm-4 col-form-label">EXT Username</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="user_username">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="user_password" class="col-sm-4 col-form-label">EXT Password</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="user_password">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="user_chat_username" class="col-sm-4 col-form-label">SS email</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="user_chat_username">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="user_chat_password" class="col-sm-4 col-form-label">SS password</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="user_chat_password">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="user_max_msg_profile" class="col-sm-4 col-form-label">Nachrichten/Profil</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="user_max_msg_profile">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="user_allow_photos" class="col-sm-4 col-form-label">Fotos</label>
+                        <div class="col-sm-8 d-flex align-items-center">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="user_allow_photos">
+                                <label class="custom-control-label" for="user_allow_photos"></label>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save_new">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="user_edit_modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_title">Mitarbeiter</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/mitarbeiter">
+                    <input type="hidden" id="user_action" value="update">
+                    <div class="form-group row">
+                        <label for="user_id" class="col-sm-4 col-form-label">ID</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="user_id" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="user_name" class="col-sm-4 col-form-label">Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="user_name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="user_username" class="col-sm-4 col-form-label">EXT Username</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="user_username">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="user_password" class="col-sm-4 col-form-label">EXT Password</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="user_password">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="user_chat_username" class="col-sm-4 col-form-label">SS email</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="user_chat_username">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="user_chat_password" class="col-sm-4 col-form-label">SS password</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="user_chat_password">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="user_max_msg_profile" class="col-sm-4 col-form-label">Nachrichten/Profil</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="user_max_msg_profile">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="user_allow_photos2" class="col-sm-4 col-form-label">Fotos</label>
+                        <div class="col-sm-8 d-flex align-items-center">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="user_allow_photos_edit">
+                                <label class="custom-control-label" for="user_allow_photos_edit"></label>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save_update">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="settings_modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form method="POST" action="/admin/settings" id="settings"></form>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal_title">Settings</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Admin Username</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="admin_username" value="<%= settings["admin_username"]%>">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Admin Password</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="admin_password" value="<%= settings["admin_password"]%>">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Min Wartezeit</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="min_wait" value="<%= settings["min_wait"]%>">
+                        </div>
+                        
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Max Wartezeit</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="max_wait" value="<%= settings["max_wait"]%>">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Max Msg/Kunde</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="max_msg_client" value="<%= settings["max_msg_client"]%>">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Max Offline</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="max_last_online" value="<%= settings["max_last_online"]%>">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Min Text Laenge</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="text_min_len" value="<%= settings["text_min_len"]%>">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Max Unbeantwortet</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="max_unbeantwortet" value="<%= settings["max_unbeantwortet"]%>">
+                        </div>
+                    </div>
+                        
+
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="save_settings">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/public/mitarbeiter.js"></script>
+
+
