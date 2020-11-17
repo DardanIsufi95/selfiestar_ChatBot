@@ -25,7 +25,6 @@ createCert().then(keys => {
   server.on('error', onError);
   server.on('listening', onListening);
   });
-var server = https.createServer(pem,app);
 
 /**
  * Listen on provided port, on all network interfaces.
