@@ -216,7 +216,7 @@ async function start(id , text , clienttype, sphoto ){
     if(sphoto.selected && sphoto.price<0){
         return "Preis muss eine positive zahl sein!"
     }
-    if(sphoto.selected && sphoto.url == "./img/placeholder.png"){
+    if(sphoto.selected && sphoto.url == "/public/images/placeholder.png"){
         return "Bitte Foto auswählen!"
     }
     
@@ -512,7 +512,7 @@ async function init(){
    
             if(result == true){
                 e.target.disabled = true;
-                document.querySelector(`[href *='#profile_${profile.objectId}']`).innerHTML = profile.username + `<img width="9px" src="./img/running.svg" alt="">`
+                document.querySelector(`[href *='#profile_${profile.objectId}']`).innerHTML = profile.username + `<img width="9px" src="/public/images/running.svg" alt="">`
                 document.querySelector(`[profileId='${profile.objectId}'][class*='button-pause']`).disabled = false
                 document.querySelector(`[profileId='${profile.objectId}'][class*='button-stop']`).disabled = false
                 document.querySelector(`select[profileId='${profile.objectId}']`).disabled = true
@@ -538,7 +538,7 @@ async function init(){
                 
                 if(true){
                     e.target.disabled = true;
-                    document.querySelector(`[href *='#profile_${profile.objectId}']`).innerHTML = profile.username + `<img width="9px" src="./img/stoped.svg" alt="">`
+                    document.querySelector(`[href *='#profile_${profile.objectId}']`).innerHTML = profile.username + `<img width="9px" src="/public/images/stoped.svg" alt="">`
                     document.querySelector(`textarea[profileId='${profile.objectId}']`).value = ""
                     document.querySelector(`[profileId='${profile.objectId}'][class*='button-pause']`).disabled = true
                     document.querySelector(`[profileId='${profile.objectId}'][class*='button-start']`).disabled = false
@@ -607,7 +607,7 @@ async function init(){
 
 
         if(profile.status =="running" || profile.status == "waiting"){
-            document.querySelector(`[href *='#profile_${profile.objectId}']`).innerHTML = profile.username + `<img width="9px" src="./img/running.svg" alt="">`
+            document.querySelector(`[href *='#profile_${profile.objectId}']`).innerHTML = profile.username + `<img width="9px" src="/public/images/running.svg" alt="">`
             tabContent.querySelector(`textarea`).disabled = true
             tabContent.querySelector(`select`).disabled = true
             tabContent.querySelector(`[class*='button-start']`).disabled = true
@@ -629,7 +629,7 @@ async function init(){
             tabContent.querySelector(`[profileId='${profile.objectId}'][class*='modal-button']`).disabled = true
         }
         if(profile.status =="stoped" ){
-            document.querySelector(`[href *='#profile_${profile.objectId}']`).innerHTML = profile.username + `<img width="9px" src="./img/stoped.svg" alt="">`
+            document.querySelector(`[href *='#profile_${profile.objectId}']`).innerHTML = profile.username + `<img width="9px" src="/public/images/stoped.svg" alt="">`
             tabContent.querySelector(`textarea`).disabled = false
             tabContent.querySelector(`select`).disabled = false
             tabContent.querySelector(`[class*='button-start']`).disabled = true
